@@ -1,6 +1,7 @@
 class Dropdown {
     constructor(selector, options) {
         this.$el = document.querySelector(selector);
+        this.$parent = document.querySelector('.app');
         this.items = options.items;
         this.$el.querySelector('.dropdown__label').textContent = this.items[0].label;
         this.$el.addEventListener('click', event => {
@@ -12,6 +13,13 @@ class Dropdown {
                 }
             } else if (event.target.tagName.toLowerCase() === 'li') {
                 this.select(event.target.dataset.id);
+            }
+        });
+        this.$parent.addEventListener('click', event => {
+            if (event.target.classList.contains('app')) {
+                if (this.$el.classList.contains('open')) {
+                    this.close();
+                }
             }
         });
 
